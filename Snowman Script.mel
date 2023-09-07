@@ -7,6 +7,17 @@ polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 
 polySphere -edit -radius 2;
 move -relative -objectSpace -worldSpaceDistance 0 7 0;
 
+// middle buttons
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -ch 1;
+scale -relative .15 .15 .15;
+move -relative 1.138 7.947 1.267;
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -ch 1;
+scale -relative .15 .15 .15;
+move -relative 1.284 7.244 1.438;
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -createUVs 2 -ch 1;
+scale -relative .15 .15 .15;
+move -relative 1.217 6.319 1.395;
+
 // create head
 polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
 move -relative 0 9.5 0;
@@ -16,6 +27,19 @@ polyCone -radius 1 -height 2 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 0
 move -relative 1.068 9.925 0.978;
 rotate -relative -objectSpace -forceOrderXYZ 37.998 12.09 -54.048;
 scale -relative .169 .642 .169;
+
+// nose edge cuts
+select -d pCone1.e[21] pCone1.e[24] ;
+select -add pCone1.e[21] pCone1.e[24] ;
+polyCut -ch 1 -pc 2.33753518 9.62258503 -1.21847176 -ro 47.79544953 38.71666786 90.00000000 pCone1.f[1:20];
+polyCut -ch 1 -pc 2.35626896 9.62390497 -1.20521665 -ro 61.92458103 -10.50383648 90.00000000 pCone1.f[21:40];
+
+// nose deformation
+select -add pCone1.e[60:79] ;
+move -r 0.0930916 -0.0372363 -0.0688769 ;
+select -r pCone1.vtx[20] ;
+move -r 0.0452799 0.00987156 -0.114181 ;
+// make sure soft select is not turned on for the deformation to work correctly
 
 // create the left eye
 polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
@@ -28,6 +52,7 @@ polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 
 scale -relative .024 .07 .07;
 move -relative .127 9.582 .961;
 rotate -relative -objectSpace -forceOrderXYZ -3.673 -85.895 28.45;
+
 
 // create mouth from left to right
 polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
@@ -51,4 +76,64 @@ scale -relative 0.073 0.073 0.073;
 
 // create scarf
 polyTorus -radius 1.1 -sectionRadius 0.5 -twist 0 -subdivisionsX 20 -subdivisionsY 20 -ax 0 1 0 -cuv 1 -ch 1;
-move -relative 0 8.769 0;
+move -relative 0 8.908 0;
+select -add pTorus1.e[200:219] ;
+softSelect -ssd 0.344938 -sud 0.5 ;
+scale -r -p -1.78814e-07cm 8.769cm -2.38419e-07cm 0.869633 0.869633 0.869633 ;
+// make sure to enable soft select in Maya to ensure it works correctly
+
+// create scarf tail
+polyPlane -width 1 -height 1 -sx 15 -sy 15 -ax 0 1 0 -cuv 2 -ch 1;
+move -relative 1.552 8.532 0.711;
+rotate -relative -objectSpace -forceOrderXYZ 0 -22.711 0;
+move -r -0.464454 0 -0.19439 pPlane1.scalePivot pPlane1.rotatePivot ;
+scale -r 2.820256 1 1 ;
+select -r pPlane1.vtx[111] ;
+softSelect -ssd 2.332462 -sud 0.5 ;
+move -r -os -wd 0 -2.42802 0 ;
+move -r -1.41858 -0.527721 -0.649829 ;
+select -r pPlane1.vtx[246] ;
+softSelect -ssd 0.98109 -sud 0.5 ;
+move -r -os -wd -0.202232 0 0 ;
+move -r -os -wd 0 0 0.147163 ;
+select -r pPlane1.vtx[4] ;
+softSelect -ssd 0.98109 -sud 0.5 ;
+move -r -0.255499 -0.201361 -0.13381 ;
+select -r pPlane1.vtx[244] ;
+softSelect -ssd 0.98109 -sud 0.5 ;
+move -r -0.107899 -0.249368 -0.107641 ;
+select -r pPlane1.f[0:224] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx 1.776593354 -pvy 7.040161297 -pvz 0.7790610226 -divisions 1 -twist 0 -taper 1 -off 0 -thickness .1 -smoothingAngle 30 pPlane1.f[0:224];
+// make sure to enable soft select in Maya to ensure it works correctly
+
+// scarf deformation
+select -r pTorus1.vtx[156] ;
+softSelect -ssd 1.379562 -sud 0.5 ;
+move -r 0.255858 -0.312991 0.0544427 ;
+select -r pTorus1.vtx[282] ;
+softSelect -ssd 1.787079 -sud 0.5 ;
+move -r 0.173139 -0.2221 -0.172974 ;
+select -r pTorus1.vtx[251] ;
+softSelect -ssd 1.914728 -sud 0.5 ;
+move -r -0.227412 -0.27158 0.0911222 ;
+select -r pTorus1.vtx[245] ;
+softSelect -ssd 1.914728 -sud 0.5 ;
+move -r -0.277724 -0.172644 -0.315468 ;
+move -r 0.260278 0.21577 0.267938 ;
+// make sure to enable soft select in Maya to ensure it works correctly
+
+// create hat
+polyCylinder -radius 1 -height 2 -sx 20 -sy 1 -sz 1 -ax 0 1 0 -rcp 0 -cuv 3 -ch 1;
+move -relative -0.264 11.244 -0.478;
+rotate -relative -objectSpace -forceOrderXYZ -16.893 -8.361 10.965;
+scale -relative 0.781 1 0.781;
+select -r pCylinder4.f[20:39] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.1234809414 -pvy 10.29658243 -pvz -0.1905033255 -divisions 1 -twist 0 -taper 1 -off 0 -thickness .2 -smoothingAngle 30 pCylinder4.f[20:39];
+select -r pCylinder4.f[60:79] ;
+polyExtrudeFacet -constructionHistory 1 -keepFacesTogether 1 -pvx -0.1094289337 -pvy 10.20184083 -pvz -0.1617535184 -divisions 1 -twist 0 -taper 1 -off 0 -thickness .7 -smoothingAngle 30 pCylinder4.f[60:79];
+
+// create arms
+polyCube -width 1 -height 1 -depth 1 -sx 1 -sy 1 -sz 1 -ax 0 1 0 -cuv 4 -ch 1;
+scale -relative 0.128 4.33 0.128;
+move -relative -2.159 8.028 2.616;
+rotate -relative -objectSpace -forceOrderXYZ 50.161 -13.551 40.071;
