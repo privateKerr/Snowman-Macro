@@ -16,3 +16,39 @@ polyCone -radius 1 -height 2 -subdivisionsX 20 -subdivisionsY 1 -subdivisionsZ 0
 move -relative 1.068 9.925 0.978;
 rotate -relative -objectSpace -forceOrderXYZ 37.998 12.09 -54.048;
 scale -relative .169 .642 .169;
+
+// create the left eye
+polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+scale -relative .024 .07 .07;
+move -relative .948 9.759 .05;
+rotate -relative -objectSpace -forceOrderXYZ -10.879 -1.899 12.354;
+
+// create the right eye
+polySphere -radius 3 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+scale -relative .024 .07 .07;
+move -relative .127 9.582 .961;
+rotate -relative -objectSpace -forceOrderXYZ -3.673 -85.895 28.45;
+
+// create mouth from left to right
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+move -relative .304 9.291 .888;
+scale -relative 0.073 0.073 0.073;
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+move -relative .456 9.201 .783;
+scale -relative 0.073 0.073 0.073;
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+move -relative 0.589 9.122 0.657;
+scale -relative 0.073 0.073 0.073;
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+move -relative 0.791 9.168 0.404;
+scale -relative 0.073 0.073 0.073;
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+move -relative 0.89 9.26 0.252;
+scale -relative 0.073 0.073 0.073;
+polySphere -radius 1 -subdivisionsX 20 -subdivisionsY 20 -axis 0 1 0 -cuv 2 -ch 1;
+move -relative 0.944 9.42 0.164;
+scale -relative 0.073 0.073 0.073;
+
+// create scarf
+polyTorus -radius 1.1 -sectionRadius 0.5 -twist 0 -subdivisionsX 20 -subdivisionsY 20 -ax 0 1 0 -cuv 1 -ch 1;
+move -relative 0 8.769 0;
